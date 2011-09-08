@@ -66,5 +66,11 @@ specified pattern at the specified location.
 # Word lists
 
 This current version uses the standard Unix word list, but it is designed in
-such a way that you can use whatever word list you please. Currently, this is
-not very possible but support will be added very soon.
+such a way that you can use whatever word list you please.
+
+To specify a new word file, you would do the following:
+
+    $ scrabble-solver letters --word-file /path/to/new/word/file.txt
+
+The word file needs to be a file that contains a list of words, one word per
+line. The words can be whatever you want, the solver really doesn't care.

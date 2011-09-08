@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'optparse'
-require File.dirname(__FILE__) + '/../src/scrabble-solver'
+require File.dirname(__FILE__) + '/../lib/scrabble-solver'
 
 options = Hash.new(nil)
 
@@ -39,6 +39,11 @@ OptionParser.new do |o|
   o.on '--at INDEX',
        'The index to search for --contains at.' do |index|
     options[:at] = index
+  end
+
+  o.on '--word-file FILE',
+       'The word file to use. Defaults to a preset list of words.' do |file|
+    options[:word_file] = file
   end
 end.parse!
 

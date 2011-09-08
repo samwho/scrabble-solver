@@ -2,8 +2,22 @@ module Scrabble
   module Solver
     # The name of the file to use as a word dictionary. This file can be any
     # file that contains a list of words, one word per line.
-    def self.word_file_name
-      File.dirname(__FILE__) + "/../../unix-dict-words.txt"
+    @word_file_name = File.dirname(__FILE__) + "/../../assets/words.txt"
+
+    # Set a new word file. Exit the program if the file does not exist.
+    #
+    # If the file does exist, the cached word list is cleared out and the
+    # next time the word list is requested, the new list from the new file
+    # is returned and subsequently cached.
+    def self.word_file_name= file_name
+      if File.exists? file_name
+        # Reset the word list
+        @word_list      = nil
+        @word_file_name = file_name
+      else
+        puts "The file name #{file_name} is not valid."
+        exit
+      end
     end
 
     # Reads in the words.txt file and returns an array containing all of the words
@@ -15,7 +29,7 @@ module Scrabble
     #     puts word
     #   end
     def self.word_list
-      @word_list ||= File.open(word_file_name) do |file|
+      @word_list ||= File.open(@word_file_name) do |file|
         file.readlines.map do |line|
           line.chomp
         end.delete_if do |line|
@@ -41,6 +55,11 @@ module Scrabble
       letters  = letters.downcase.split(//)
       unknowns = letters.count "?"
       letters.delete "?"
+
+      # Set a new word file if the option has been specified
+      if options[:word_file]
+        self.word_file_name = options[:word_file]
+      end
 
       words = word_list.keep_if do |word|
         # Split the word into its letters.
