@@ -30,22 +30,31 @@ module Scrabble
     it "should be able to filter words by length" do
       words = Solver.words_for "diegtlkwj", longer_than: "4"
       words.each do |word|
-        (word.length > 4).should == true
+        word.length.should be > 4
       end
+
+      # Ensure that some words were actually checked in the above loop.
+      words.length.should be > 0, "No words scanned."
     end
 
     it "should be able to filter by length, less than" do
       words = Solver.words_for "diegtlkwj", shorter_than: "4"
       words.each do |word|
-        (word.length < 4).should == true
+        word.length.should be < 4
       end
+
+      # Ensure that some words were actually checked in the above loop.
+      words.length.should be > 0, "No words scanned."
     end
 
     it "should be able to filter by length both less than and greater than" do
       words = Solver.words_for "diegtlkwj", shorter_than: "6", longer_than: "4"
       words.each do |word|
-        (word.length > 4 and word.length < 6).should == true
+        word.length.should be > 4 and word.length.should be < 6
       end
+
+      # Ensure that some words were actually checked in the above loop.
+      words.length.should be > 0, "No words scanned."
     end
 
     it "should be able to return only words that have a specific letter at " +
@@ -54,6 +63,19 @@ module Scrabble
       words.each do |word|
         word[1].should == "i"
       end
+
+      # Ensure that some words were actually checked in the above loop.
+      words.length.should be > 0, "No words scanned."
+    end
+
+    it "should be able to return only words that have a specific middle part" do
+      words = Solver.words_for "diegti?wj", contains: "it", at: "2"
+      words.each do |word|
+        word[1, 2].should == "it"
+      end
+
+      # Ensure that some words were actually checked in the above loop.
+      words.length.should be > 0, "No words scanned."
     end
   end
 end

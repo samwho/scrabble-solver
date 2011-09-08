@@ -1,5 +1,11 @@
 module Scrabble
   module Solver
+    # The name of the file to use as a word dictionary. This file can be any
+    # file that contains a list of words, one word per line.
+    def self.word_file_name
+      File.dirname(__FILE__) + "/../../unix-dict-words.txt"
+    end
+
     # Reads in the words.txt file and returns an array containing all of the words
     # in that file.
     #
@@ -9,8 +15,7 @@ module Scrabble
     #     puts word
     #   end
     def self.word_list
-      @word_list ||= File.open(File.dirname(__FILE__) +
-                     "/../../unix-dict-words.txt") do |file|
+      @word_list ||= File.open(word_file_name) do |file|
         file.readlines.map do |line|
           line.chomp
         end.delete_if do |line|
@@ -53,24 +58,31 @@ module Scrabble
         word.length == unknowns
       end
 
+      # Filter only words that start with a specific sequence.
       if options[:starts_with]
         words.keep_if { |word| word.start_with? options[:starts_with] }
       end
 
+      # Filter words that only end in a certain sequence.
       if options[:ends_with]
         words.keep_if { |word| word.end_with? options[:ends_with] }
       end
 
+      # Fitler only words shorter than a given amount.
       if options[:shorter_than]
         words.keep_if { |word| word.length < options[:shorter_than].to_i }
       end
 
+      # Filter words only longer than a given amount.
       if options[:longer_than]
         words.keep_if { |word| word.length > options[:longer_than].to_i }
       end
 
+      # Filter words that contain a specific sequence at a given 1-based index.
       if options[:contains] and options[:at]
-        words.keep_if { |word| word[options[:at].to_i - 1] == options[:contains] }
+        words.keep_if do |word|
+          word[options[:at].to_i - 1, options[:contains].length] == options[:contains]
+        end
       end
 
       return words

@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require File.dirname(__FILE__) + '/../src/scrabble-solver'
+
+options = Hash.new(nil)
+
+OptionParser.new do |o|
+  o.on '-h', '--help', 'Display this message' do
+    puts o
+    exit
+  end
+
+  o.on '--longer-than LENGH',
+       'Only return words longer than LENGTH.' do |length|
+    options[:longer_than] = length
+  end
+
+  o.on '--shorter-than LENGH',
+       'Only return words shorter than LENGTH.' do |length|
+    options[:shorter_than] = length
+  end
+
+  o.on '--starts-with PREFIX',
+       'Only return words that start with PREFIX.' do |prefix|
+    options[:starts_with] = prefix
+  end
+
+  o.on '--ends-with SUFFIX',
+       'Only return words that end with SUFFIX.' do |suffix|
+    options[:ends_with] = suffix
+  end
+
+  o.on '--contains PART',
+       'Only return words that contain PART. Must be combined with --at.' do |part|
+    options[:contains] = part
+  end
+
+  o.on '--at INDEX',
+       'The index to search for --contains at.' do |index|
+    options[:at] = index
+  end
+end.parse!
+
+letters = ARGV[0]
+
+if letters.nil?
+  puts "You need to supply letters to work with as the first argument."
+  exit
+end
+
+puts Scrabble::Solver.words_for letters, options
