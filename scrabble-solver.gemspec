@@ -12,8 +12,13 @@ Gem::Specification.new do |s|
   s.bindir = 'bin'
   s.executables = ["scrabble-solver"]
 
-  # Add all files to the files parameter.
   s.files = []
-  Dir["**/*.*"].each { |path| s.files.push path }
+  Dir["lib/**/*.rb"].each { |path| s.files.push path }
+  Dir["spec/**/*.rb"].each { |path| s.files.push path }
+  Dir["assets/**/*"].each { |path| s.files.push path }
   s.files.push ".gemtest"
+  s.files.push "README.md"
+  s.files.push "LICENSE"
+  s.files.push "Gemfile"
+  s.files.push "Guardfile"
 end

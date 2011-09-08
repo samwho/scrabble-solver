@@ -3,8 +3,12 @@
 This is a command line Scrabble solver written in Ruby. Its purpose is to find
 all of the possible words given a set of tiles and some optional arguments.
 
-NOTE: This is still a work in progress and will eventually be distributed as
-a gem. Bear with me as I finish it up :)
+# Installation
+
+Dead simple. you need to have Ruby 1.9.2 installed on your system and then just
+execute:
+
+    $ gem install scrabble-solver
 
 # Usage
 
