@@ -5,7 +5,15 @@ require File.dirname(__FILE__) + '/../lib/scrabble-solver'
 
 options = Hash.new(nil)
 
+# Use the optparse library to populate the options hash.
 OptionParser.new do |o|
+  o.banner = 'Usage: scrabble-solver tiles [options]'
+
+  # Add the README contents to the --help flag.
+  o.separator "\n" + File.read(File.dirname(__FILE__) + '/../README.md') + "\n"
+
+  o.separator "Optional arguments:"
+
   o.on '-h', '--help', 'Display this message' do
     puts o
     exit
@@ -47,11 +55,14 @@ OptionParser.new do |o|
   end
 end.parse!
 
+# Pull the tiles from the first argument.
 letters = ARGV[0]
 
+# Exit the program if no first argument was supplied.
 if letters.nil?
   puts "You need to supply letters to work with as the first argument."
   exit
 end
 
+# If all is well, solve :)
 puts Scrabble::Solver.words_for letters, options
