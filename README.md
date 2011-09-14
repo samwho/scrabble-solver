@@ -63,9 +63,17 @@ your Z is the first letter in the word, check this out:
 
     $ scrabble-solver zloogsti --contains z --at 1
 
-The `--contains` and `--at` flags must be used in conjunction. They will not
-do anything if used separately. They will only return words that have the
-specified pattern at the specified location.
+You can also use wildcards in the `--contains` flag:
+
+    $ scrabble-solver zloogsti --contains z?o --at 1
+
+This will match z, anything, o and then anything after that. So "zoo"
+will match beautifully.
+
+If you don't feel like specifying an `--at` flag, you don't have to.
+This will return "zoology" just fine:
+
+    $ scrabble-solver zlogoyo --contains gy
 
 # Word lists
 

@@ -1,0 +1,12 @@
+v 0.1
+-----
+
+- Initial release
+
+v 0.2
+-----
+
+- Added the ability to use wildcards in --contains
+- You no longer need to use --at with --contains. --contains can work fine on
+  its own.
+- Output is now sorted by word length.

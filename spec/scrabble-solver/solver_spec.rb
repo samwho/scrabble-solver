@@ -89,6 +89,27 @@ module Scrabble
         words.length.should be > 0, "No words scanned."
       end
 
+      it "should be able to use wildcards in --contains" do
+        words = Solver.words_for "diegti?wj", contains: "g?t", at: "3"
+        words.each do |word|
+          word.should match /^..g.t/
+        end
+
+        # Ensure that some words were actually checked in the above loop.
+        words.length.should be > 0, "No words scanned."
+      end
+
+      it "should be able to use --contains without --at" do
+        words = Solver.words_for "diegti?wj", contains: "g?t"
+        words.each do |word|
+          word.should match /g.t/
+        end
+
+        # Ensure that some words were actually checked in the above loop.
+        words.length.should be > 0, "No words scanned."
+      end
+
+
       it "should be able to take a new word file if specified" do
         words = Solver.words_for "????", word_file: test_word_file
         words.should be_empty
@@ -166,6 +187,26 @@ module Scrabble
         words = `#{executable} diegti?wj --contains it --at 2`.split(/\n/)
         words.each do |word|
           word[1, 2].should == "it"
+        end
+
+        # Ensure that some words were actually checked in the above loop.
+        words.length.should be > 0, "No words scanned."
+      end
+
+      it "should be able to use wildcards in --contains" do
+        words = `#{executable} diegti?wj --contains g?t --at 3`.split(/\n/)
+        words.each do |word|
+          word.should match /^..g.t/
+        end
+
+        # Ensure that some words were actually checked in the above loop.
+        words.length.should be > 0, "No words scanned."
+      end
+
+      it "should be able to use --contains without --at" do
+        words = `#{executable} diegti?wj --contains g?t`.split(/\n/)
+        words.each do |word|
+          word.should match /g.t/
         end
 
         # Ensure that some words were actually checked in the above loop.

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{scrabble-solver}
-  s.version = "0.1.1"
+  s.version = "0.2"
   s.date = %q{2011-09-08}
   s.authors = ["Sam Rose"]
   s.email = %q{samwho@lbak.co.uk}

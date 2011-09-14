@@ -65,4 +65,8 @@ if letters.nil?
 end
 
 # If all is well, solve :)
-puts Scrabble::Solver.words_for letters, options
+words = Scrabble::Solver.words_for(letters, options).sort do |word1, word2|
+  word1.length <=> word2.length
+end
+
+puts words

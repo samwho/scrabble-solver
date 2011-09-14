@@ -98,9 +98,16 @@ module Scrabble
       end
 
       # Filter words that contain a specific sequence at a given 1-based index.
-      if options[:contains] and options[:at]
+      if options[:contains]
+        # Generate a regex to match against the string. This regex will replace
+        # question marks with dots, so that they match any character. This
+        # gives the user a lot of power with the --contains --at combo.
+        regex  = ''
+        regex += ('^' + ('.' * (options[:at].to_i - 1))) if options[:at]
+        regex += options[:contains].gsub('?', '.')
+        regex  = Regexp.new regex
         words.keep_if do |word|
-          word[options[:at].to_i - 1, options[:contains].length] == options[:contains]
+          word =~ regex
         end
       end
 
