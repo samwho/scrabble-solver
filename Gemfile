@@ -1,6 +1,12 @@
 source :rubygems
 
-gem 'rb-inotify', group: :development
-gem 'libnotify', group: :development
-gem 'guard-rspec', group: :development
-gem 'rspec', group: :development
+group :development do
+  gem 'rb-inotify'
+  gem 'libnotify'
+end
+
+group :test do
+  gem 'rake'
+  gem 'rspec'
+  gem 'guard-rspec'
+end
