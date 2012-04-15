@@ -5,7 +5,7 @@ all of the possible words given a set of tiles and some optional arguments.
 
 # Installation
 
-Dead simple. you need to have Ruby 1.9.2 installed on your system and then just
+Dead simple. you need to have Ruby >= 1.9.2 installed on your system and then just
 execute:
 
     $ gem install scrabble-solver
