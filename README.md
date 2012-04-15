@@ -86,3 +86,10 @@ To specify a new word file, you would do the following:
 
 The word file needs to be a file that contains a list of words, one word per
 line. The words can be whatever you want, the solver really doesn't care.
+
+# Contributing
+
+This project uses the [git-flow](https://github.com/nvie/gitflow) branching
+strategy. If you want to contribute, read up on how git-flow works, fork the
+repository, create a feature branch and issue a pull request to the develop
+branch :)
