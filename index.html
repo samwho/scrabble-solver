@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Scrabble-solver : A command line scrabble solver written in Ruby." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Scrabble-solver</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/samwho/scrabble-solver">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Scrabble-solver</h1>
+          <h2 id="project_tagline">A command line scrabble solver written in Ruby.</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/samwho/scrabble-solver/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/samwho/scrabble-solver/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Scrabble Solver</h1>
+
+<p>This is a command line Scrabble solver written in Ruby. Its purpose is to find
+all of the possible words given a set of tiles and some optional arguments.</p>
+
+<h1>Installation</h1>
+
+<p>Dead simple. you need to have Ruby &gt;= 1.9.2 installed on your system and then just
+execute:</p>
+
+<pre><code>$ gem install scrabble-solver
+</code></pre>
+
+<h1>Usage</h1>
+
+<h2>Basic</h2>
+
+<p>Let's start with the basics, a simple set of tiles:</p>
+
+<pre><code>$ scrabble-solver tehre
+</code></pre>
+
+<p>This will return a list of words, among them will be "there", "three", "thee"
+and so on.</p>
+
+<h2>Controlling length</h2>
+
+<p>If you only want words that are longer than 5 letters returned, that's easy:</p>
+
+<pre><code>$ scrabble-solver tehre --longer-than 5
+</code></pre>
+
+<p>If you only want words that are <em>shorter</em> than 4 letters, that's easy too:</p>
+
+<pre><code>$ scrabble-solver tehre --shorter-than 4
+</code></pre>
+
+<p>You can, of course, combine these if you want:</p>
+
+<pre><code>$ scrabble-solver tehre --shorter-than 6 --longer-than 3
+</code></pre>
+
+<h2>Filtering by starts-with and ends-with</h2>
+
+<p>This is pretty self explanatory. If you only want words that start with "th",
+you would do something like this:</p>
+
+<pre><code>$ scrabble-solver tehre --starts-with th
+</code></pre>
+
+<p>And the same goes for ends-with:</p>
+
+<pre><code>$ scrabble-solver tehre --ends-with re
+</code></pre>
+
+<h2>Blank tiles (wildcards)</h2>
+
+<p>Got a blank tile? No problem!</p>
+
+<pre><code>$ scrabble-solver "tehre?"
+</code></pre>
+
+<p>You need to wrap the tiles you have in double quotes, otherwise the terminal
+will shout at you. It doesn't matter where you put the question mark(s), they
+will register fine wherever you put them and you can have as many as you want.</p>
+
+<h2>Being specific</h2>
+
+<p>Say you've got a really sweet triple letter lined up that will only work if
+your Z is the first letter in the word, check this out:</p>
+
+<pre><code>$ scrabble-solver zloogsti --contains z --at 1
+</code></pre>
+
+<p>You can also use wildcards in the <code>--contains</code> flag:</p>
+
+<pre><code>$ scrabble-solver zloogsti --contains z?o --at 1
+</code></pre>
+
+<p>This will match z, anything, o and then anything after that. So "zoo"
+will match beautifully.</p>
+
+<p>If you don't feel like specifying an <code>--at</code> flag, you don't have to.
+This will return "zoology" just fine:</p>
+
+<pre><code>$ scrabble-solver zlogoyo --contains gy
+</code></pre>
+
+<h1>Word lists</h1>
+
+<p>This current version uses the standard Unix word list, but it is designed in
+such a way that you can use whatever word list you please.</p>
+
+<p>To specify a new word file, you would do the following:</p>
+
+<pre><code>$ scrabble-solver letters --word-file /path/to/new/word/file.txt
+</code></pre>
+
+<p>The word file needs to be a file that contains a list of words, one word per
+line. The words can be whatever you want, the solver really doesn't care.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Scrabble-solver maintained by <a href="https://github.com/samwho">samwho</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
